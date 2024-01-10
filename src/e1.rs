@@ -12,17 +12,10 @@ pub fn merge_alternately(word1: String, word2: String) -> String {
     }
 
     if word1.len() > word2.len() {
-        let mut i = word2.len();
-        while i < word1.len() {
-            string.push(w1[i]);
-            i += 1;
-        }
+        string.push_str(&word1[word2.len()..]);
+        
     } else {
-        let mut i = word1.len();
-        while i < word2.len() {
-            string.push(w2[i]);
-            i += 1;
-        }
+        string.push_str(&word2[word1.len()..]);
     }
 
     string

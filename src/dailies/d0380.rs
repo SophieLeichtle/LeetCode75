@@ -22,26 +22,28 @@ impl RandomizedSet {
     }
     
     fn insert(&mut self, val: i32) -> bool {
-        if !self.set.contains_key(&val) {
-            self.vec.push(val);
-            self.set.insert(val, self.vec.len() - 1);
-            return true;
+        if self.set.contains_key(&val) {
+            return false;
         }
-        false
+        self.set.insert(val, self.vec.len());
+        self.vec.push(val);
+        
+        true
     }
     
     fn remove(&mut self, val: i32) -> bool {
-        if self.set.contains_key(&val) {
-            let index = self.set.remove(&val).unwrap();
-            self.vec.swap_remove(index);
-            if index != self.vec.len(){
-               self.set.insert(self.vec[index], index); 
+        match self.set.remove(&val){
+            Some(index) => {
+                self.vec.swap_remove(index);
+                if index != self.vec.len() {
+                    self.set.insert(self.vec[index], index);
+                }
+                return true;
+            },
+            None => {
+                return false;
             }
-            
-            return true;
         }
-
-        false
     }
     
     fn get_random(&self) -> i32 {

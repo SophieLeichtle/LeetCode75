@@ -13,3 +13,5 @@ pub mod p0011;
 pub mod p1679;
 pub mod p0643;
 pub mod p1456;
+pub mod p1004;
+pub mod p1493;
